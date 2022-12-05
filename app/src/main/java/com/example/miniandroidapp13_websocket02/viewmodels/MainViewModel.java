@@ -83,6 +83,7 @@ public class MainViewModel extends ViewModel {
             // エミュレータから実行するために、ここではlocalhostとか127.0.0.1ではないことに注意
             Request.Builder request = new Request.Builder();
             request.url("ws://10.0.2.2:8080/demo/WebSocketDemo");
+            //request.url("ws://10.0.2.2:8080/demo/WebSocketDemoPathParam/aaaaaa");
 
             webSocket = client.newWebSocket(request.build(), this);
         }
