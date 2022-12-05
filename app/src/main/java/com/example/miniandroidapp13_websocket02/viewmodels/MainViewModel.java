@@ -23,7 +23,7 @@ public class MainViewModel extends ViewModel {
     private WebSocketClient webSocketClient;
 
     //ライブデータ
-    private static MutableLiveData<String> textLiveData;
+    private MutableLiveData<String> textLiveData;
 
     // コンストラクタ
     public MainViewModel() {
