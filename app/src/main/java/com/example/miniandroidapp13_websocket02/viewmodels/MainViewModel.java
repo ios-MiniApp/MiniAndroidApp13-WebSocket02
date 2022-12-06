@@ -1,8 +1,6 @@
 package com.example.miniandroidapp13_websocket02.viewmodels;
 
-
 import android.os.Handler;
-import android.os.Looper;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -14,9 +12,6 @@ import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 import okio.ByteString;
-
-// インナークラスの参考記事
-// http://ichitcltk.hustle.ne.jp/gudon2/index.php?pageType=file&id=java008_inner_class3
 
 public class MainViewModel extends ViewModel {
 
@@ -56,13 +51,11 @@ public class MainViewModel extends ViewModel {
 
 
     /*
-    WebSocketに関わるインナークラス
+    WebSocketに関わる内部クラス
      */
     public class WebSocketClient extends WebSocketListener {
 
         private WebSocket webSocket;
-
-        private Thread mThread;
         private Handler mHandler = new Handler();
 
         // 外部クラスのLiveDateにアクセスする
@@ -79,11 +72,20 @@ public class MainViewModel extends ViewModel {
         public WebSocketClient() {
             OkHttpClient client = new OkHttpClient();
 
-            // 接続先のエンドポイント
-            // エミュレータから実行するために、ここではlocalhostとか127.0.0.1ではないことに注意
             Request.Builder request = new Request.Builder();
+
+            // 接続先のURLを指定。
+            // 今回は３つ種類のサーバーURLをサンプルで用意しているので、どれか１つをコメントアウト外して使う。
+            // エミュレータから実行するために、ここではlocalhostとか127.0.0.1ではないことに注意
+
+            // ● サンプル１シンプルなWebSocketのサンプル
             request.url("ws://10.0.2.2:8080/demo/WebSocketDemo");
-            //request.url("ws://10.0.2.2:8080/demo/WebSocketDemoPathParam/aaaaaa");
+
+            // ● パスパラメータを付与できるサンプル
+            // request.url("ws://10.0.2.2:8080/demo/WebSocketDemoPathParam/kokowa-nanidemo-ok");
+
+            // ● サーバーでエンコードしたJSONが返ってくるサンプル
+            //request.url("ws://10.0.2.2:8080/demo/WebSocketDemoJSON");
 
             webSocket = client.newWebSocket(request.build(), this);
         }
@@ -95,6 +97,7 @@ public class MainViewModel extends ViewModel {
             webSocket.send(message);
         }
         //-----------------------------------------------------------------------------
+
 
         @Override
         public void onOpen(WebSocket webSocket, Response response) {
@@ -127,4 +130,5 @@ public class MainViewModel extends ViewModel {
             System.out.println("kota: WebSocketの接続が失敗しました："+ t.getLocalizedMessage());
         }
     }
+
 }

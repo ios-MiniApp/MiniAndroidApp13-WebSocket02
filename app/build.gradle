@@ -38,5 +38,11 @@ dependencies {
 
     // 追加
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation 'javax.websocket:javax.websocket-api:1.1'
+
+    // JSONを使うjackson
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.13.0'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.0'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.13.0'
 
 }
